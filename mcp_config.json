@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "meshy": {
+      "serverUrl": "https://mcp.meshy.ai/mcp",
+      "headers": { "Authorization": "Bearer ${MESHY_API_KEY}" },
+      "disabledTools": ["open_meshy_studio", "show_model", "app_image_to_3d"],
+      "variables": [
+        {
+          "name": "MESHY_API_KEY",
+          "title": "Meshy API key",
+          "description": "Create a key in the Meshy Developer Console. Needs a paid Meshy plan; keys restricted to an IP allowlist are refused. Generation spends your Meshy credits.",
+          "link": "https://www.meshy.ai/developers/keys"
+        }
+      ]
+    }
+  }
+}

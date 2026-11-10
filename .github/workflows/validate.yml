@@ -1,0 +1,51 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Google's installer downloads the latest build for this platform and checks it against
+      # the SHA-512 in its release manifest before installing.
+      - name: Install the Antigravity CLI
+        run: |
+          curl -fsSL https://antigravity.google/cli/install.sh | bash -s -- --dir "$RUNNER_TEMP/agy"
+          echo "$RUNNER_TEMP/agy" >> "$GITHUB_PATH"
+
+      # The same check the Antigravity Marketplace requires: 0 errors and 0 warnings.
+      # It needs no Google sign-in.
+      - name: Validate the plugin
+        run: |
+          agy --version
+          agy plugin validate --strict .
+
+      - name: Check that the version, changelog and release tag agree
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          version=$(jq -r .version plugin.json)
+          if ! grep -qF "## [$version]" CHANGELOG.md; then
+            echo "CHANGELOG.md has no entry for $version (the version in plugin.json)." >&2
+            exit 1
+          fi
+          if [ -n "$RELEASE_TAG" ] && [ "$RELEASE_TAG" != "v$version" ]; then
+            echo "Release tag $RELEASE_TAG does not match plugin.json version $version." >&2
+            exit 1
+          fi
+          echo "plugin.json $version, CHANGELOG entry found${RELEASE_TAG:+, tag $RELEASE_TAG}"

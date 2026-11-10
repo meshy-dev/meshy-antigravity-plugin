@@ -1,0 +1,18 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "meshy",
+  "displayName": "Meshy",
+  "version": "0.1.0",
+  "description": "Generate 3D models from text or images with Meshy, then texture them and download game-ready GLB, FBX, OBJ and USDZ files, using your Meshy credits.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Turn this reference image into a textured 3D model and download it as GLB.",
+    "Generate a low-poly treasure chest for my game and export it as FBX.",
+    "Make a concept image of a sci-fi helmet, then turn it into a 3D model."
+  ],
+  "author": { "name": "Meshy", "url": "https://www.meshy.ai" },
+  "homepage": "https://docs.meshy.ai/en/api/ai",
+  "repository": "https://github.com/meshy-dev/meshy-antigravity-plugin",
+  "license": "MIT",
+  "keywords": ["meshy", "3d", "text-to-3d", "image-to-3d", "texturing", "glb", "fbx", "game-assets"]
+}
