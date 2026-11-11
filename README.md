@@ -28,13 +28,14 @@ Never paste an API key into the chat.
 
 Before any paid step the skill shows the tools, models and credits involved and waits for an explicit yes. Reads (`get_balance`, `get_task`, `list_tasks`) and uploads are free. `download_model` spends no credits, but each download counts toward your plan's monthly download limit where it has one.
 
-The skill quotes the prices `get_balance` returns, which cover default settings. For another model or option it says the price isn't listed. Full price list: https://docs.meshy.ai/en/api/pricing
+The skill quotes the prices `get_balance` returns: each generation at its default settings, plus texturing by model and resolution. For anything not listed there it says the price isn't listed. Full price list: https://docs.meshy.ai/en/api/pricing
 
 To send a local image or save a model, the agent runs `curl`. Antigravity asks you to approve each command unless you allow it.
 
 ## Troubleshooting
 
-- **401 / key rejected**: the key is mistyped, revoked, or restricted to an IP allowlist. Create a new key and update it under Customizations → Installed → Meshy.
+- **401 / key rejected**: the key is mistyped or revoked. Create a new key and update it under Customizations → Installed → Meshy.
+- **403 ip_not_authorized**: the key is restricted to an IP allowlist, which the hosted server does not accept. Create a key without one.
 - **402 plan_upgrade_required**: generation needs a paid Meshy plan.
 - **429**: the hosted server allows 20 requests per second per key. Wait and retry.
 - **Task still running**: ask the agent to keep polling the same task instead of starting a new one.
@@ -43,7 +44,7 @@ To send a local image or save a model, the agent runs `curl`. Antigravity asks y
 
 ## Data and privacy
 
-Prompts, images and models you send are processed by Meshy under the [Privacy Policy](https://www.meshy.ai/privacy) and [Terms](https://www.meshy.ai/terms). A local image goes only to Meshy: the agent uploads it to Meshy's own storage with `create_upload`, never to another host. The key is stored by Antigravity, never in this repository.
+Prompts, images and models you send are processed by Meshy under the [Privacy Policy](https://www.meshy.ai/privacy-policy) and [Terms](https://www.meshy.ai/terms-of-use). A local image goes only to Meshy: the agent uploads it to Meshy's own storage with `create_upload`, never to another host. The key is stored by Antigravity, never in this repository.
 
 ## Support
 

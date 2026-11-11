@@ -7,4 +7,4 @@ Geometry `ai_model` plus texture `texture_model`, by project:
 - Many props or user-generated content: `meshy-t2` + `meshy-n1`
 - Many drafts at low cost: `meshy-6-lite` + `meshy-6-lite`
 
-Prices come from `get_balance` at call time and cover default parameters only. For any other model or option, say the price isn't listed and may differ; never quote a number from memory. Reference: https://docs.meshy.ai/en/api/models and https://docs.meshy.ai/en/api/pricing
+Prices come from `get_balance` at call time: each create at its default parameters, plus `texture_model` by model and resolution. For anything not listed there, say the price isn't listed and may differ; never quote a number from memory. Reference: https://docs.meshy.ai/en/api/models and https://docs.meshy.ai/en/api/pricing
